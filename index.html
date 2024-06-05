@@ -70,6 +70,9 @@
             <p>4.Zulaikha Binti Kamaruddin </p>
             <p>5.Muhammad Rafiq Haqimy</p>
         </div>
+
+        <label for="process" style="font-size: 20px;">Process:</label>
+        <textarea id="process" rows="4" style="width: 95%; font-size: 20px;" readonly></textarea>
     </div>
 
     <script>
@@ -86,6 +89,7 @@
             const afterValue=[];
             const newChar=[];
             var encryptedText = '';
+            var processText = '';
 
             //step 3: start loop
             for (let i = 0; i < splitted.length; i++) { 
@@ -268,10 +272,11 @@
                 }
 
                 encryptedText = encryptedText + newChar[i]; //combine char every loop
-            
+                processText = splitted[i] + ' > '+ textValue[i] + ' > '+ (textValue[i]+key) + ' > '+ afterValue[i] + ' > '+ newChar[i] + ' \n '; 
             }//end loop
 
             document.getElementById('ciphertext').value = encryptedText; //send to html
+            document.getElementById('process').value = processText; //send to html
         }
     </script>
 </body>
