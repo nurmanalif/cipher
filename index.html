@@ -8,57 +8,93 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+            background-color: #ff8282;
         }
         .container {
-            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            width: 1000px;
             margin: 0 auto;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 8px;
+            background-color: white;
+            box-shadow: 0px 0px 20px rgb(133, 133, 133);
         }
         input, textarea, button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
         }
+        .title{
+            margin-bottom: 20px;
+        }
+        .title h2{
+            font-size: 40px;
+            margin: 0px;
+            text-align: center;
+        }
+        .title p{
+            font-size: 14px;
+            margin-block: 8px;
+        }
+        .flex-row{
+            display: flex;flex-direction: row; align-items: center; font-size: 20px; gap:30px;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Shift Cipher Cryptography</h2>
-        <label for="key">Shift (0-25):</label>
-        <input type="number" id="key" min="0" max="25" value="3">
-        <label for="plaintext">Plaintext:</label>
-        <textarea id="plaintext" rows="4" placeholder="Enter text to encrypt..."></textarea>
-        <button onclick="encrypt()">Encrypt</button>
-        <label for="ciphertext">Ciphertext:</label>
-        <textarea id="ciphertext" rows="4" placeholder="Encrypted text..." readonly></textarea>
+        <div class="title">
+            <h2>Shift Cipher Cryptography</h2>
+        </div>
+        
+        <div class="flex-row">
+            <p>Shift Key (0-25):</p>
+            <input type="number" id="key" min="0" max="25" value="3" style="width: 50px; font-size: 20px;">
+        </div>
+        
+        <label for="plaintext" style="font-size: 20px;">Plaintext:</label>
+        <textarea id="plaintext" rows="4" placeholder="Enter text to encrypt..." style="width: 95%; font-size: 20px;"></textarea>
+        <button onclick="encrypt()" style="width: 98%;">Encrypt</button>
+        <label for="ciphertext" style="font-size: 20px;">Ciphertext:</label>
+        <textarea id="ciphertext" rows="4" placeholder="Encrypted text..." style="width: 95%; font-size: 20px;" readonly></textarea>
+        
+        <div class="title">
+            
+            <b><p>Developed by:</p></b>
+            <p>1.Muhammad Harith Bin Mohamad Hassan </p>
+            <p>2.Nurman Alif Bin Rosman</p>
+            <p>3.Nur Syamimi Binti Hashim</p>
+            <p>4.Zulaikha Binti Kamaruddin </p>
+            <p>5.Muhammad Rafiq Haqimy</p>
+        </div>
     </div>
 
     <script>
 
         function encrypt() {
-            //get input from html
+            //step 1: get input from html
             const key = parseInt(document.getElementById('key').value);
             const plaintext = document.getElementById('plaintext').value;
 
-            //string to splitted char ('h' 'e' 'l' 'l' 'o')
+            //step 2: string to splitted char ('h' 'e' 'l' 'l' 'o')
             const splitted = plaintext.split('');
-            console.log(splitted);
-
             
             const textValue=[];
             const afterValue=[];
             const newChar=[];
             var encryptedText = '';
 
-            for (let i = 0; i < splitted.length; i++) {
+            //step 3: start loop
+            for (let i = 0; i < splitted.length; i++) { 
                 console.log(splitted[i]);
                 
-                //check each splitted char, then convert to textvalue (0-26);
+                // step 4: check each splitted char, then convert to textvalue (0-26);
                 switch (splitted[i]) {
                     case 'a':
-                        textValue[i] = 0;
+                        textValue[i] = 0;   // char a = value 0.....
                         break;
                     case 'b':
                         textValue[i] = 1;
@@ -136,18 +172,18 @@
                         textValue[i] = 25;
                         break;
                     default:
-                        textValue[i] = 99; // For any character not in a-z
+                        textValue[i] = 99; // For 'space'
                 }
 
-                if (textValue[i] != 99){   //if not space
+                if (textValue[i] != 99){   // step 5: check if not 'space', then add value with key ex. 0 (a) + 3 (key)
                     
                     afterValue[i] = (textValue[i] + key + 26) % 26;  // +26 (so that can accept negative key)
                 }
-                else{
+                else{   // step 6: if 'space', no need add key
                     afterValue[i] = 99;
                 }
 
-
+                // step 7: take the (value+key) then change to char back
                 switch (afterValue[i]) {
                     case 0:
                         newChar[i] = 'a';
@@ -228,17 +264,14 @@
                         newChar[i] = 'z';
                         break;
                     default:
-                        newChar[i] = ' '; // For any value not in 0-25
+                        newChar[i] = ' '; // For 'space'
                 }
 
-                console.log(newChar[i]);
-                encryptedText = encryptedText + newChar[i];
-            }
+                encryptedText = encryptedText + newChar[i]; //combine char every loop
+            
+            }//end loop
 
-
-            //const ciphertext = shiftString(plaintext, key); 
-
-            document.getElementById('ciphertext').value = encryptedText;
+            document.getElementById('ciphertext').value = encryptedText; //send to html
         }
     </script>
 </body>
