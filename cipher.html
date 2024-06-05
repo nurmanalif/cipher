@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift Cipher Cryptography</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Shift Cipher Cryptography</h2>
+        <label for="key">Shift (0-25):</label>
+        <input type="number" id="key" min="0" max="25" value="3">
+        <label for="plaintext">Plaintext:</label>
+        <textarea id="plaintext" rows="4" placeholder="Enter text to encrypt..."></textarea>
+        <button onclick="encrypt()">Encrypt</button>
+        <label for="ciphertext">Ciphertext:</label>
+        <textarea id="ciphertext" rows="4" placeholder="Encrypted text..." readonly></textarea>
+    </div>
+
+    <script>
+
+        function encrypt() {
+            //get input from html
+            const key = parseInt(document.getElementById('key').value);
+            const plaintext = document.getElementById('plaintext').value;
+
+            //string to splitted char ('h' 'e' 'l' 'l' 'o')
+            const splitted = plaintext.split('');
+            console.log(splitted);
+
+            
+            const textValue=[];
+            const afterValue=[];
+            const newChar=[];
+            var encryptedText = '';
+
+            for (let i = 0; i < splitted.length; i++) {
+                console.log(splitted[i]);
+                
+                //check each splitted char, then convert to textvalue (0-26);
+                switch (splitted[i]) {
+                    case 'a':
+                        textValue[i] = 0;
+                        break;
+                    case 'b':
+                        textValue[i] = 1;
+                        break;
+                    case 'c':
+                        textValue[i] = 2;
+                        break;
+                    case 'd':
+                        textValue[i] = 3;
+                        break;
+                    case 'e':
+                        textValue[i] = 4;
+                        break;
+                    case 'f':
+                        textValue[i] = 5;
+                        break;
+                    case 'g':
+                        textValue[i] = 6;
+                        break;
+                    case 'h':
+                        textValue[i] = 7;
+                        break;
+                    case 'i':
+                        textValue[i] = 8;
+                        break;
+                    case 'j':
+                        textValue[i] = 9;
+                        break;
+                    case 'k':
+                        textValue[i] = 10;
+                        break;
+                    case 'l':
+                        textValue[i] = 11;
+                        break;
+                    case 'm':
+                        textValue[i] = 12;
+                        break;
+                    case 'n':
+                        textValue[i] = 13;
+                        break;
+                    case 'o':
+                        textValue[i] = 14;
+                        break;
+                    case 'p':
+                        textValue[i] = 15;
+                        break;
+                    case 'q':
+                        textValue[i] = 16;
+                        break;
+                    case 'r':
+                        textValue[i] = 17;
+                        break;
+                    case 's':
+                        textValue[i] = 18;
+                        break;
+                    case 't':
+                        textValue[i] = 19;
+                        break;
+                    case 'u':
+                        textValue[i] = 20;
+                        break;
+                    case 'v':
+                        textValue[i] = 21;
+                        break;
+                    case 'w':
+                        textValue[i] = 22;
+                        break;
+                    case 'x':
+                        textValue[i] = 23;
+                        break;
+                    case 'y':
+                        textValue[i] = 24;
+                        break;
+                    case 'z':
+                        textValue[i] = 25;
+                        break;
+                    default:
+                        textValue[i] = 99; // For any character not in a-z
+                }
+
+                if (textValue[i] != 99){   //if not space
+                    
+                    afterValue[i] = (textValue[i] + key + 26) % 26;  // +26 (so that can accept negative key)
+                }
+                else{
+                    afterValue[i] = 99;
+                }
+
+
+                switch (afterValue[i]) {
+                    case 0:
+                        newChar[i] = 'a';
+                        break;
+                    case 1:
+                        newChar[i] = 'b';
+                        break;
+                    case 2:
+                        newChar[i] = 'c';
+                        break;
+                    case 3:
+                        newChar[i] = 'd';
+                        break;
+                    case 4:
+                        newChar[i] = 'e';
+                        break;
+                    case 5:
+                        newChar[i] = 'f';
+                        break;
+                    case 6:
+                        newChar[i] = 'g';
+                        break;
+                    case 7:
+                        newChar[i] = 'h';
+                        break;
+                    case 8:
+                        newChar[i] = 'i';
+                        break;
+                    case 9:
+                        newChar[i] = 'j';
+                        break;
+                    case 10:
+                        newChar[i] = 'k';
+                        break;
+                    case 11:
+                        newChar[i] = 'l';
+                        break;
+                    case 12:
+                        newChar[i] = 'm';
+                        break;
+                    case 13:
+                        newChar[i] = 'n';
+                        break;
+                    case 14:
+                        newChar[i] = 'o';
+                        break;
+                    case 15:
+                        newChar[i] = 'p';
+                        break;
+                    case 16:
+                        newChar[i] = 'q';
+                        break;
+                    case 17:
+                        newChar[i] = 'r';
+                        break;
+                    case 18:
+                        newChar[i] = 's';
+                        break;
+                    case 19:
+                        newChar[i] = 't';
+                        break;
+                    case 20:
+                        newChar[i] = 'u';
+                        break;
+                    case 21:
+                        newChar[i] = 'v';
+                        break;
+                    case 22:
+                        newChar[i] = 'w';
+                        break;
+                    case 23:
+                        newChar[i] = 'x';
+                        break;
+                    case 24:
+                        newChar[i] = 'y';
+                        break;
+                    case 25:
+                        newChar[i] = 'z';
+                        break;
+                    default:
+                        newChar[i] = ' '; // For any value not in 0-25
+                }
+
+                console.log(newChar[i]);
+                encryptedText = encryptedText + newChar[i];
+            }
+
+
+            //const ciphertext = shiftString(plaintext, key); 
+
+            document.getElementById('ciphertext').value = encryptedText;
+        }
+    </script>
+</body>
+</html>
