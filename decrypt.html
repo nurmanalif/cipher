@@ -276,7 +276,7 @@
                 }
 
                 encryptedText = encryptedText + newChar[i]; //combine char every loop
-                processText = splitted[i] + ' > '+ textValue[i] + ' > '+ (textValue[i]+key) + ' > '+ afterValue[i] + ' > '+ newChar[i] + ' \n '; 
+                processText = splitted[i] + ' > '+ textValue[i] + ' > '+ (textValue[i]-key) + ' > '+ afterValue[i] + ' > '+ newChar[i] + ' \n '; 
             }//end loop
 
             document.getElementById('ciphertext').value = encryptedText; //send to html
